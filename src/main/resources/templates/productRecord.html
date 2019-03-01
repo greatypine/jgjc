@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>商品上传记录</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>文件名</th>
+        <th>上传时间</th>
+        <th>上传结果</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each="record : ${recordList}">
+        <td th:text="${record.fileName}">***.csv</td>
+        <td th:text="${record.createTime}">商品信息</td>
+        <td th:switch="${record.result}">成功</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+
+
+</body>
+</html>

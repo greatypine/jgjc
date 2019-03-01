@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container"><br/>
+    <th:block>
+        <table>
+            <tr th:each="emp : ${emp}">
+                <td th:text="${emp.empno}"></td>
+                <td th:text="${emp.ename}"></td>
+                <td th:text="${emp.job}"></td>
+                <td th:text="${emp.mgr}"></td>
+                <td th:text="${emp.hiredate}"></td>
+                <td th:text="${emp.sal}"></td>
+                <td th:text="${emp.comm}"></td>
+                <td th:text="${emp.deptno}"></td>
+                </tr>
+        </table>
+    </th:block>
+    <br>
+    <th:block>
+        <table>
+            <tr th:each="dept : ${dept}">
+                <td th:text="${dept.deptno}"></td>
+                <td th:text="${dept.dname}"></td>
+                <td th:text="${dept.loc}"></td>
+            </tr>
+        </table>
+    </th:block>
+</body>
+</html>

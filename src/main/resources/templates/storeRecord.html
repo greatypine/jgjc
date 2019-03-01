@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>门店上传记录</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script th:src="@{/webjars/jquery/3.3.1/jquery.js}"></script>
+    <script type="text/javascript">
+
+        /**
+         * 查询
+         */
+        function  getStoreRecord() {
+
+            $.ajax({
+                type:"post",
+                url:"/uploadRecordOfPage",
+                dataType:"json",
+                data:{"pageNo":1,pageSize:10,type:"ndrc_store"},
+                success:function (data) {
+                    alert(data["recordList"].content)
+                    $("#record").val(data["recordList"].content);
+                }
+            })
+        }
+
+        /**
+         * 手动上传门店信息
+         */
+        function exportStoreInfoToCSV(){
+            $.ajax({
+                type:"post",
+                url:"/exportStoreInfoToCSV",
+                dataTYpe:"json",
+                data:{},
+                success:function (data) {
+                    alert(data["recordList"])
+                   $("#record").val(data["recordList"]);
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+    <button th:type="button" th:text="查询" th:onclick="getStoreRecord()"></button>
+    <button th:type="button" th:text="手动执行任务" th:onclick="exportStoreInfoToCSV()"></button>
+
+<div></div>
+<table>
+    <thead>
+    <tr>
+        <th>文件名</th>
+        <th>上传时间</th>
+        <th>上传结果</th>
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each="record : ${recordList}" id="record">
+        <td th:text="${record.fileName}">***.csv</td>
+        <td th:text="${record.createTime}">门店信息</td>
+        <td th:switch="${record.result}">成功</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+
+
+</body>
+</html>
